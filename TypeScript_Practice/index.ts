@@ -20,8 +20,29 @@ let friend: unknown;
 // 파라미터가 옵션인 경우
 // 변수? : number = 변수 : number | undefined
 
-function sum(x?: number): void {
+function one(x?: number): void {
   1 + 1;
 }
 
-sum();
+one();
+
+// Narrowing
+function sum(x: number | string) {
+  if (typeof x === "number") return x + 2;
+  else return x + "2";
+}
+
+sum(100);
+
+// Assertion
+// 표명, 프로그램 안에 추가하는 참, 거짓을 미리 가정하는 문
+// 타입 덮어쓰기
+// 1. Narrowing할 때 쓴다.
+// 2. 무슨 타입이 들어올지 100% 확실할 때 쓴다. -> 버그 캐치가 안되기 때문!
+// 그래서 자주 안 쓰인다. (비상용 !)
+function pushArray(x: number | string) {
+  let array: number[] = [];
+  array[0] = x as number;
+}
+
+pushArray(123);
